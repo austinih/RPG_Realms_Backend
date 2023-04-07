@@ -21,14 +21,8 @@ A website devoted to highlighting the incredible world of Tabletop RPGs. Users c
 - Game description includes dice used
 - include entries for supplement books
 
-## Wireframes
-![Screenshot of ERD](Assets/Wireframes.png)
-
 ## ERD
 ![Screenshot of ERD](Assets/ERD.png)
-
-## Component Hierarchy
-![Screenshot of ERD](Assets/Component_Hierarchy.png)
 
 ## Links
 
