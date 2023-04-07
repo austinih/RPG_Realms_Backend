@@ -1,3 +1,5 @@
+# RPG_Realms_Backend
+
 # RPG Realms
 A website devoted to highlighting the incredible world of Tabletop RPGs. Users can discover new games, post reviews, and discuss topics in forums. The fullstack application was built using React.js and Tailwind.css on the Frontend, with a Djano PostgreSQL Database on the backend.
 
