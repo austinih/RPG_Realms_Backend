@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class RpgrealmsConfig(AppConfig):
+class RpgRealmsConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "rpgrealms"
+    name = "rpg_realms"
