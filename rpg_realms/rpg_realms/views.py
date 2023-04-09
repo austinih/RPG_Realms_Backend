@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
 from .models import Publisher, RPG, Review, User, Comment
-from .serializers import PublisherSerializer, RPGSerializer, ReviewSerializer, UserSerializer
+from .serializers import PublisherSerializer, RPGSerializer, ReviewSerializer, UserSerializer, CommentSerializer
 # Create your views here.
 
 class PublisherList(generics.ListCreateAPIView):
@@ -29,9 +29,17 @@ class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ReviewSerializer
 
 class UserList(generics.ListCreateAPIView):
-    queryset = Review.objects.all()
+    queryset = User.objects.all()
     serializer_class = UserSerializer
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+class CommentList(generics.ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer

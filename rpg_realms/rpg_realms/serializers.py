@@ -30,9 +30,14 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         many=True,
         read_only=True
     )
+    comments = serializers.HyperlinkedRelatedField(
+        view_name='comment_detail',
+        many=True,
+        read_only=True
+    )
     class Meta:
         model = User
-        fields = ('id','name','username','email','password','reviews')
+        fields = ('id','name','username','email','password','reviews','comments')
 
 class ReviewSerializer(serializers.HyperlinkedModelSerializer):
     rpg = serializers.HyperlinkedRelatedField(
@@ -41,6 +46,11 @@ class ReviewSerializer(serializers.HyperlinkedModelSerializer):
     )
     user = serializers.HyperlinkedRelatedField(
         view_name='user_detail',
+        read_only=True
+    )
+    comments = serializers.HyperlinkedRelatedField(
+        view_name='comment_detail',
+        many=True,
         read_only=True
     )
     rpg_id = serializers.PrimaryKeyRelatedField(
@@ -53,4 +63,25 @@ class ReviewSerializer(serializers.HyperlinkedModelSerializer):
     )
     class Meta:
         model = Review
-        fields = ('id', 'rpg','user', 'title', 'content', 'score')
+        fields = ('id', 'rpg','rpg_id','user','user_id', 'title', 'content', 'score', 'comments')
+
+class CommentSerializer(serializers.HyperlinkedModelSerializer):
+    review = serializers.HyperlinkedRelatedField(
+        view_name='review_detail',
+        read_only=True
+    )
+    user = serializers.HyperlinkedRelatedField(
+        view_name='user_detail',
+        read_only=True
+    )
+    review_id = serializers.PrimaryKeyRelatedField(
+        queryset=Review.objects.all(),
+        source='review'
+    )
+    user_id = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        source='user'
+    )
+    class Meta:
+        model = Review
+        fields = ('id', 'review','review_id','user','user_id', 'content')
