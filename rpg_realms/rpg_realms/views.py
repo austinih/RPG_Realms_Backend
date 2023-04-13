@@ -16,8 +16,14 @@ class RPGList(generics.ListCreateAPIView):
     queryset = RPG.objects.all()
     serializer_class = RPGSerializer
 
+# new
+# class FullRPGDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = RPG.objects.select_related('publisher')
+#     serializer_class = FullRPGSerializer
+# New
+
 class RPGDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = RPG.objects.all()
+    queryset = RPG.objects.select_related('publisher')
     serializer_class = RPGSerializer
 
 class ReviewList(generics.ListCreateAPIView):

@@ -10,7 +10,8 @@ urlpatterns = [
     path('comments/', views.CommentList.as_view(), name='comment_list'),
     path('publishers/<int:pk>/', views.PublisherDetail.as_view(), name='publisher_detail'),
     path('rpgs/<int:pk>/', views.RPGDetail.as_view(), name='rpg_detail'),
+    # path('fullrpgs/<int:pk>/', views.FullRPGDetail.as_view(), name='full_rpg_detail'),
     path('reviews/<int:pk>/', views.ReviewDetail.as_view(), name='review_detail'),
     path('users/<int:pk>/', views.UserDetail.as_view(), name='user_detail'),
-    path('comments/<int:pk>/', views.CommentDetail.as_view(), name='comment_detail'),
+    path('comments/<int:pk>/', views.CommentDetail.as_view(),name='comment_detail'),
 ]

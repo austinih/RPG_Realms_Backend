@@ -62,11 +62,30 @@ class PublisherSerializer(serializers.HyperlinkedModelSerializer):
         model = Publisher
         fields = ('id','name','website_url','logo_url','is_indie','publisher_url','rpgs')
 
-
+# New
+# class FullRPGSerializer(serializers.HyperlinkedModelSerializer):
+#     publisher = PublisherSerializer(
+#         view_name='publisher_detail',
+#         read_only=True
+#     )
+#     reviews = ReviewSerializer(
+#         many=True,
+#         read_only=True
+#     )
+#     rpg_url = serializers.ModelSerializer.serializer_url_field(
+#         view_name='rpg_detail'
+#     )
+#     publisher_id = serializers.PrimaryKeyRelatedField(
+#         queryset=Publisher.objects.all(),
+#         source='publisher'
+#     )
+#     class Meta:
+#         model = RPG
+#         fields = ('id', 'publisher','publisher_id', 'title', 'description', 'genre','image_url','rpg_url','publisher','reviews')
+# End New
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    reviews = serializers.HyperlinkedRelatedField(
-        view_name='review_detail',
+    reviews = ReviewSerializer(
         many=True,
         read_only=True
     )
@@ -107,3 +126,6 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Review
         fields = ('id', 'review','review_id','user','user_id', 'content','comment_url')
+
+
+    
