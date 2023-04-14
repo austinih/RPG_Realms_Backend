@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Publisher, RPG, Review, User
 
+
 class ReviewSerializer(serializers.HyperlinkedModelSerializer):
     rpg = serializers.HyperlinkedRelatedField(
         view_name='rpg_detail',
@@ -28,7 +29,7 @@ class ReviewSerializer(serializers.HyperlinkedModelSerializer):
     )
     class Meta:
         model = Review
-        fields = ('id', 'rpg','rpg_id','user','user_id', 'title', 'content', 'score', 'comments','review_url')
+        fields = ('id', 'rpg','rpg_id','user','user_id', 'title', 'content', 'score','date_posted', 'comments','review_url')
 
 class RPGSerializer(serializers.HyperlinkedModelSerializer):
     publisher = serializers.HyperlinkedRelatedField(

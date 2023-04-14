@@ -2,7 +2,10 @@ from django.shortcuts import render
 from rest_framework import generics
 from .models import Publisher, RPG, Review, User, Comment
 from .serializers import PublisherSerializer, RPGSerializer, ReviewSerializer, UserSerializer, CommentSerializer
+from django.views.generic import DeleteView
 # Create your views here.
+
+
 
 class PublisherList(generics.ListCreateAPIView):
     queryset = Publisher.objects.all()
@@ -33,6 +36,30 @@ class ReviewList(generics.ListCreateAPIView):
 class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+
+class ReviewCreateView(generics.CreateAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
+class ReviewDeleteView(DeleteView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
+# class ReviewDeleteView(DeleteView):
+#     success_message = "Deleted Successfully"
+#     def get_queryset(self):
+#         qs = super(ReviewDeleteView, self).get_queryset()
+#         return qs.filter(owner=self.request.user)
+    # model = Review
+    # serializer_class = ReviewSerializer
+    # success_url = reverse_lazy('venues_list_view')
+
+# def deleteReview(request, id):
+#   review = Review.objects.get(id=id)
+#   review.delete()
+#   return HttpResponseRedirect(reverse('index'))
+
+
 
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
