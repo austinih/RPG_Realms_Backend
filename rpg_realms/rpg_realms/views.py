@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
 from .models import Publisher, RPG, Review, User, Comment
-from .serializers import PublisherSerializer, RPGSerializer, ReviewSerializer, UserSerializer, CommentSerializer
+from .serializers import PublisherSerializer, RPGSerializer, ReviewSerializer, UserSerializer, CommentSerializer, ReviewCreateSerializer
 from django.views.generic import DeleteView
 # Create your views here.
 
@@ -39,11 +39,12 @@ class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class ReviewCreateView(generics.CreateAPIView):
     queryset = Review.objects.all()
-    serializer_class = ReviewSerializer
+    serializer_class = ReviewCreateSerializer
 
 class ReviewDeleteView(DeleteView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+    success_url = 'http://localhost:3000/profile'
 
 # class ReviewDeleteView(DeleteView):
 #     success_message = "Deleted Successfully"

@@ -27,9 +27,12 @@ class ReviewSerializer(serializers.HyperlinkedModelSerializer):
         queryset=User.objects.all(),
         source='user'
     )
+    rpg_title = serializers.CharField(source='rpg.title')
+    rpg_image = serializers.CharField(source='rpg.image_url')
+    username = serializers.CharField(source='user.username')
     class Meta:
         model = Review
-        fields = ('id', 'rpg','rpg_id','user','user_id', 'title', 'content', 'score','date_posted', 'comments','review_url')
+        fields = ('id', 'rpg','rpg_id','rpg_title','rpg_image','user','user_id','username', 'title', 'content', 'score','date_posted', 'comments','review_url')
 
 class RPGSerializer(serializers.HyperlinkedModelSerializer):
     publisher = serializers.HyperlinkedRelatedField(
@@ -47,9 +50,12 @@ class RPGSerializer(serializers.HyperlinkedModelSerializer):
         queryset=Publisher.objects.all(),
         source='publisher'
     )
+    publisher_name = serializers.CharField(source='publisher.name')
+    publisher_website = serializers.CharField(source='publisher.website_url')
+    publisher_logo = serializers.CharField(source='publisher.logo_url')
     class Meta:
         model = RPG
-        fields = ('id', 'publisher','publisher_id', 'title', 'description', 'genre','image_url','rpg_url','reviews')
+        fields = ('id', 'publisher','publisher_id','publisher_name','publisher_website','publisher_logo', 'title', 'description', 'genre','image_url','rpg_url','reviews')
 
 class PublisherSerializer(serializers.HyperlinkedModelSerializer):
     rpgs = RPGSerializer(
@@ -129,4 +135,32 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'review','review_id','user','user_id', 'content','comment_url')
 
 
+class ReviewCreateSerializer(serializers.HyperlinkedModelSerializer):
+    rpg = serializers.HyperlinkedRelatedField(
+        view_name='rpg_detail',
+        read_only=True
+    )
+    user = serializers.HyperlinkedRelatedField(
+        view_name='user_detail',
+        read_only=True
+    )
+    comments = serializers.HyperlinkedRelatedField(
+        view_name='comment_detail',
+        many=True,
+        read_only=True
+    )
+    review_url = serializers.ModelSerializer.serializer_url_field(
+        view_name='review_detail'
+    )
+    rpg_id = serializers.PrimaryKeyRelatedField(
+        queryset=RPG.objects.all(),
+        source='rpg'
+    )
+    user_id = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        source='user'
+    )
     
+    class Meta:
+        model = Review
+        fields = ('id', 'rpg','rpg_id','user','user_id', 'title', 'content', 'score','date_posted', 'comments','review_url')
