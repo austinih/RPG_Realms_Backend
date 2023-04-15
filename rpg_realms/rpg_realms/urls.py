@@ -20,6 +20,7 @@ urlpatterns = [
     path('reviews/<int:pk>/', views.ReviewDetail.as_view(), name='review_detail'),
     path('create-review-detail/', views.ReviewCreateView.as_view(), name='create_review_detail'),
     # path('delete/<int:id>', views.deleteReview, name='deleteReview')
-    path('delete-review/<int:pk>', views.ReviewDeleteView.as_view(), name='delete_review_detail')
+    path('update-review/<int:pk>/', views.ReviewUpdateView.as_view(), name='update_review_detail'),
+    path('delete-review/<int:pk>/', views.ReviewDeleteView.as_view(), name='delete_review_detail')
 
 ]

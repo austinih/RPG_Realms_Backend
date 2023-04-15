@@ -41,10 +41,18 @@ class ReviewCreateView(generics.CreateAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewCreateSerializer
 
-class ReviewDeleteView(DeleteView):
+class ReviewUpdateView(generics.UpdateAPIView):
     queryset = Review.objects.all()
-    serializer_class = ReviewSerializer
-    success_url = 'http://localhost:3000/profile'
+    serializer_class = ReviewCreateSerializer
+
+class ReviewDeleteView(generics.DestroyAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewCreateSerializer
+
+# class ReviewDeleteView(DeleteView):
+#     queryset = Review.objects.all()
+#     serializer_class = ReviewSerializer
+#     success_url = 'http://localhost:3000/profile'
 
 # class ReviewDeleteView(DeleteView):
 #     success_message = "Deleted Successfully"
